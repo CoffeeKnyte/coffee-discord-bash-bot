@@ -10,7 +10,7 @@ esac
 #port=$(docker inspect "$server" | jq -r ' .[].HostConfig.PortBindings[]' | grep HostPort | sed 's/[^0-9]//g')
 
 URL="http://127.0.0.1:$port/identity"
-if [ "$container"=="jf" ]; then URL="http://127.0.0.1:$port/health"; fi
+if [ "$container"=="jellyfin" ]; then URL="http://127.0.0.1:$port/health"; fi
 
 STATUS_CODE=$(curl -m 20 -s -o /dev/null -w "%{http_code}" ${URL})
 
