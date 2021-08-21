@@ -53,4 +53,4 @@ async def on_message(message):
         datenow = now.strftime("%H:%M %p")
         await message.channel.send( '```rust\n"{}" server was rebooted by "{}" at {} with result: \n- {}```'.format(server, message.author.display_name, datenow, result2))
 
-client.run('xxxxxxx')
+client.run('<insert-bot-token>')
