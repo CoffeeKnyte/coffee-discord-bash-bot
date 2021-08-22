@@ -12,7 +12,7 @@ esac
 URL="http://127.0.0.1:$port/identity"
 if [ "$container"=="jellyfin" ]; then URL="http://127.0.0.1:$port/health"; fi
 
-STATUS_CODE=$(curl -m 20 -s -o /dev/null -w "%{http_code}" ${URL})
+STATUS_CODE=$(curl -m 20 -s -o /dev/null -w "%{http_code}\n" ${URL})
 
 if test $STATUS_CODE -ne 200; then
   if [ -z "$2" ]; then /usr/bin/docker restart "$container"; fi
