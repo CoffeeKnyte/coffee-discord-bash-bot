@@ -2,7 +2,7 @@
 
 server="$1"
 CONTAINER_MIN_AGE="200" #Minimum age of container before allowing reboot
-prefix="" #Determines which box to ssh into
+prefix="" 
 
 if [ -z "$1" ]; then echo "Missing parameter"; exit 1; fi
 
@@ -23,11 +23,11 @@ CURRENT_TIMESTAMP=$(date +%s)
 CREATED_TIME=$(($CURRENT_TIMESTAMP-$CREATED_TIMESTAMP))
 	
 if test $STATUS_CODE -ne 200; then
+    printf "%10s = Up %5d seconds. %10s server was down\n" $server $CREATED_TIME $1
     if [ -z "$2" ] && [ $CREATED_TIME -gt $CONTAINER_MIN_AGE ]; then 
 		${prefix} /usr/bin/docker restart $server
 		printf "Restarted $server server at\t $(/bin/date)\n" >> /opt/logs/plex_restart.log
     fi
-    printf "%10s = Up %5d seconds. %10s server was down\n" $server $CREATED_TIME $1
 	exit 0
 else
     printf "%10s = Up %5d seconds. %10s server is fine\n" $server $CREATED_TIME $1
